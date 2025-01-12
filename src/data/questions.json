@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "type": "open",
+        "question": "What is the purpose of the `useState` hook in React?",
+        "answer": "To manage state in a functional component"
+    },
+    {
+        "id": 2,
+        "type": "yes-no",
+        "question": "Is JavaScript a statically typed language?",
+        "answer": "No"
+    },
+    {
+        "id": 3,
+        "type": "multiple",
+        "question": "Which of the following are JavaScript frameworks?",
+        "options": [
+            "React",
+            "Angular",
+            "Django",
+            "Vue"
+        ],
+        "answer": [
+            "React",
+            "Angular",
+            "Vue"
+        ]
+    }
+]

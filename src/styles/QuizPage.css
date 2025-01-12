@@ -1,0 +1,118 @@
+/* General container styling */
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Title styling */
+  .quiz-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #202124;
+  }
+  
+  /* Question block styling */
+  .quiz-question {
+    margin-bottom: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #dadce0;
+  }
+  
+  .quiz-question:last-child {
+    border-bottom: none;
+  }
+  
+  .quiz-question-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #3c4043;
+    margin-bottom: 1rem;
+  }
+  
+  /* Input styles */
+  .quiz-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .quiz-input:focus {
+    border-color: #1a73e8;
+  }
+  
+  /* Fieldset and legend styling for yes-no and multiple-choice */
+  .quiz-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .quiz-legend {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #5f6368;
+    margin-bottom: 0.5rem;
+  }
+  
+  .quiz-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #3c4043;
+  }
+  
+  .quiz-label input {
+    margin-right: 0.5rem;
+  }
+  
+  /* Submit button */
+  .quiz-submit {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #1a73e8;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .quiz-submit:hover {
+    background-color: #1764c5;
+  }
+  
+  .quiz-submit:focus {
+    outline: 3px solid rgba(26, 115, 232, 0.5);
+  }
+  
+  /* Responsive design */
+  @media (max-width: 600px) {
+    .quiz-container {
+      padding: 1.5rem;
+    }
+  
+    .quiz-title {
+      font-size: 1.8rem;
+    }
+  
+    .quiz-question-text {
+      font-size: 1rem;
+    }
+  }
+  
