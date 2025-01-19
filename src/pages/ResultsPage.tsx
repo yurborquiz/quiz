@@ -4,7 +4,7 @@ import "../styles/ResultsPage.css";
 
 interface Question {
   id: number;
-  type: "open" | "yesno" | "multiple";
+  type: "open" | "yes-no" | "multiple";
   question: string;
   options?: string[];
   answer: string | string[];
@@ -29,9 +29,21 @@ const ResultsPage: React.FC = () => {
     return q.answer === userAnswer;
   };
 
+  const totalQuestions = questions.length;
+  const correctAnswers = questions.filter((q) =>
+    isCorrect(q, answers[q.id] || "")
+  ).length;
+  const incorrectAnswers = totalQuestions - correctAnswers;
+
+  const correctPercentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
+  const incorrectPercentage = ((incorrectAnswers / totalQuestions) * 100).toFixed(2);
+
   return (
     <div className="results-container">
       <h1 className="results-title">Quiz Results</h1>
+      <p className="results-summary">
+        Correct: {correctPercentage}% | Incorrect: {incorrectPercentage}%
+      </p>
       {questions.map((q) => {
         const userAnswer = answers[q.id] || "";
         const correct = isCorrect(q, userAnswer);
