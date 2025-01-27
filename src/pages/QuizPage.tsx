@@ -3,12 +3,18 @@ import { useNavigate } from "react-router-dom";
 import questions from "../data/questions.json";
 import "../styles/QuizPage.css";
 
+interface Option {
+  id: number;
+  text: string;
+  correct: boolean;
+}
+
 interface Question {
   id: number;
-  type: "open" | "yes-no" | "multiple";
+  type: "RADIO" | "CHECKBOX";
   question: string;
-  options?: string[];
-  answer: string | string[];
+  options: Option[];
+  isRequired: boolean;
 }
 
 const QuizPage: React.FC = () => {
@@ -18,8 +24,12 @@ const QuizPage: React.FC = () => {
 
   useEffect(() => {
     const shuffledQuestions = (questions as Question[]).sort(() => 0.5 - Math.random());
-    setSelectedQuestions(shuffledQuestions.slice(0, 40));
+    const uniqueQuestions = new Set<Question>();
+    shuffledQuestions.forEach(q => uniqueQuestions.add(q));
+    setSelectedQuestions(Array.from(uniqueQuestions).slice(0, 80));
   }, []);
+  
+  
 
   const handleAnswerChange = (id: number, value: string | string[]): void => {
     setAnswers({ ...answers, [id]: value });
@@ -35,14 +45,7 @@ const QuizPage: React.FC = () => {
       {selectedQuestions.map((q) => (
         <div key={q.id} className="quiz-question">
           <p className="quiz-question-text">{q.question}</p>
-          {q.type === "open" && (
-            <input
-              type="text"
-              className="quiz-input"
-              onChange={(e) => handleAnswerChange(q.id, e.target.value)}
-            />
-          )}
-          {q.type === "yes-no" && (
+          {q.type === "RADIO" && (
             <fieldset className="quiz-fieldset">
               <legend className="quiz-legend">Choose an answer:</legend>
               <label className="quiz-label">
@@ -65,22 +68,22 @@ const QuizPage: React.FC = () => {
               </label>
             </fieldset>
           )}
-          {q.type === "multiple" && q.options && (
+          {q.type === "CHECKBOX" && q.options && (
             <fieldset className="quiz-fieldset">
               <legend className="quiz-legend">Select all that apply:</legend>
-              {q.options.map((option: string) => (
-                <label key={option} className="quiz-label">
+              {q.options.map((option: Option) => (
+                <label key={option.id} className="quiz-label">
                   <input
                     type="checkbox"
                     onChange={(e) => {
                       const existingAnswers = (answers[q.id] as string[]) || [];
                       const updatedAnswers = e.target.checked
-                        ? [...existingAnswers, option]
-                        : existingAnswers.filter((ans) => ans !== option);
+                        ? [...existingAnswers, option.text]
+                        : existingAnswers.filter((ans) => ans !== option.text);
                       handleAnswerChange(q.id, updatedAnswers);
                     }}
                   />
-                  {option}
+                  {option.text}
                 </label>
               ))}
             </fieldset>
