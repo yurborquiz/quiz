@@ -2,12 +2,17 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/ResultsPage.css";
 
+interface Option {
+  id: number;
+  text: string;
+  correct: boolean;
+}
+
 interface Question {
   id: number;
-  type: "open" | "yes-no" | "multiple";
+  type: "RADIO" | "CHECKBOX";
   question: string;
-  options?: string[];
-  answer: string | string[];
+  options: Option[];
 }
 
 const ResultsPage: React.FC = () => {
@@ -19,24 +24,25 @@ const ResultsPage: React.FC = () => {
   };
 
   const isCorrect = (q: Question, userAnswer: string | string[]): boolean => {
-    if (Array.isArray(q.answer)) {
+    const correctAnswers = q.options.filter(option => option.correct).map(option => option.text);
+    if (Array.isArray(userAnswer)) {
       return (
         Array.isArray(userAnswer) &&
-        q.answer.every((a) => userAnswer.includes(a)) &&
-        userAnswer.length === q.answer.length
+        correctAnswers.every((a) => userAnswer.includes(a)) &&
+        userAnswer.length === correctAnswers.length
       );
     }
-    return q.answer === userAnswer;
+    return correctAnswers.includes(userAnswer as string);
   };
 
   const totalQuestions = questions.length;
-  const correctAnswers = questions.filter((q) =>
+  const correctAnswersCount = questions.filter((q) =>
     isCorrect(q, answers[q.id] || "")
   ).length;
-  const incorrectAnswers = totalQuestions - correctAnswers;
+  const incorrectAnswersCount = totalQuestions - correctAnswersCount;
 
-  const correctPercentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
-  const incorrectPercentage = ((incorrectAnswers / totalQuestions) * 100).toFixed(2);
+  const correctPercentage = ((correctAnswersCount / totalQuestions) * 100).toFixed(2);
+  const incorrectPercentage = ((incorrectAnswersCount / totalQuestions) * 100).toFixed(2);
 
   return (
     <div className="results-container">
@@ -62,7 +68,7 @@ const ResultsPage: React.FC = () => {
               <p className="results-correct-answer">
                 <strong>Correct answer:</strong>{" "}
                 <span>
-                  {Array.isArray(q.answer) ? q.answer.join(", ") : q.answer}
+                  {q.options.filter(option => option.correct).map(option => option.text).join(", ")}
                 </span>
               </p>
             )}
