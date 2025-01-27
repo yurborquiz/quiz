@@ -22,4 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.vercel
+
+# Dependency directories and files
+package-lock.json
