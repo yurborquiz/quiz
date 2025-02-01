@@ -57,13 +57,23 @@ const ResultsPage: React.FC = () => {
             <p className="results-question-text">{q.question}</p>
 
             <p className={`results-answer ${correct ? "correct-answer" : "incorrect-answer"}`}>
-              <strong>Your answer:</strong>{" "}
-              <span>{Array.isArray(userAnswer) ? userAnswer.join(", ") : userAnswer}</span>
+              <strong>Your answer:</strong>
             </p>
+            {Array.isArray(userAnswer) ? (
+              userAnswer.map((answer, index) => (
+                <p key={index} className={`user-answer ${correct ? "correct-answer" : "incorrect-answer"}`}>
+                  {answer}
+                </p>
+              ))
+            ) : (
+              <p className={`user-answer ${correct ? "correct-answer" : "incorrect-answer"}`}>
+                {userAnswer}
+              </p>
+            )}
 
             {!correct && (
               <div className="results-correct-answer">
-                <strong>Correct answer(s):</strong>
+                <strong>Correct answer:</strong>
                 {q.options
                   .filter(option => option.correct)
                   .map(option => (
