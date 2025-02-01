@@ -16,12 +16,6 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-
-  .results-summary {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
   
   .correct {
     border-color: green;
@@ -39,16 +33,6 @@
   .results-answer {
     margin-bottom: 5px;
   }
-
-  .correct-answer {
-    color: green; 
-    font-weight: bold;
-  }
-
-  .incorrect-answer {
-    color: red;
-    font-weight: bold;
-  }  
   
   .results-correct-answer {
     color: green;

@@ -45,20 +45,27 @@ const QuizPage: React.FC = () => {
       {selectedQuestions.map((q) => (
         <div key={q.id} className="quiz-question">
           <p className="quiz-question-text">{q.question}</p>
-          {q.type === "RADIO" && q.options && (
+          {q.type === "RADIO" && (
             <fieldset className="quiz-fieldset">
-              <legend className="quiz-legend">Choose one answer:</legend>
-              {q.options.map((option) => (
-                <label key={option.id} className="quiz-label">
-                  <input
-                    type="radio"
-                    name={`q-${q.id}`}
-                    value={option.text}
-                    onChange={() => handleAnswerChange(q.id, option.text)}
-                  />
-                  {option.text}
-                </label>
-              ))}
+              <legend className="quiz-legend">Choose an answer:</legend>
+              <label className="quiz-label">
+                <input
+                  type="radio"
+                  name={`q-${q.id}`}
+                  value="yes"
+                  onChange={() => handleAnswerChange(q.id, "yes")}
+                />
+                Yes
+              </label>
+              <label className="quiz-label">
+                <input
+                  type="radio"
+                  name={`q-${q.id}`}
+                  value="no"
+                  onChange={() => handleAnswerChange(q.id, "no")}
+                />
+                No
+              </label>
             </fieldset>
           )}
           {q.type === "CHECKBOX" && q.options && (
