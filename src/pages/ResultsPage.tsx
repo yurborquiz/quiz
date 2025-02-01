@@ -27,8 +27,7 @@ const ResultsPage: React.FC = () => {
     const correctAnswers = q.options.filter(option => option.correct).map(option => option.text);
     if (Array.isArray(userAnswer)) {
       return (
-        Array.isArray(userAnswer) &&
-        correctAnswers.every((a) => userAnswer.includes(a)) &&
+        correctAnswers.every(a => userAnswer.includes(a)) &&
         userAnswer.length === correctAnswers.length
       );
     }
@@ -36,11 +35,8 @@ const ResultsPage: React.FC = () => {
   };
 
   const totalQuestions = questions.length;
-  const correctAnswersCount = questions.filter((q) =>
-    isCorrect(q, answers[q.id] || "")
-  ).length;
+  const correctAnswersCount = questions.filter(q => isCorrect(q, answers[q.id] || "")).length;
   const incorrectAnswersCount = totalQuestions - correctAnswersCount;
-
   const correctPercentage = ((correctAnswersCount / totalQuestions) * 100).toFixed(2);
   const incorrectPercentage = ((incorrectAnswersCount / totalQuestions) * 100).toFixed(2);
 
@@ -48,33 +44,37 @@ const ResultsPage: React.FC = () => {
     <div className="results-container">
       <h1 className="results-title">Quiz Results</h1>
       <p className="results-summary">
-        Correct: {correctPercentage}% | Incorrect: {incorrectPercentage}%
+        Correct: {correctAnswersCount} / {totalQuestions} ({correctPercentage}%) | 
+        Incorrect: {incorrectAnswersCount} / {totalQuestions} ({incorrectPercentage}%)
       </p>
-      {questions.map((q) => {
+
+      {questions.map(q => {
         const userAnswer = answers[q.id] || "";
         const correct = isCorrect(q, userAnswer);
 
         return (
-          <div
-            key={q.id}
-            className={`results-question ${correct ? "correct" : "incorrect"}`}
-          >
+          <div key={q.id} className={`results-question ${correct ? "correct" : "incorrect"}`}>
             <p className="results-question-text">{q.question}</p>
-            <p className="results-answer">
+
+            <p className={`results-answer ${correct ? "correct-answer" : "incorrect-answer"}`}>
               <strong>Your answer:</strong>{" "}
               <span>{Array.isArray(userAnswer) ? userAnswer.join(", ") : userAnswer}</span>
             </p>
+
             {!correct && (
-              <p className="results-correct-answer">
-                <strong>Correct answer:</strong>{" "}
-                <span>
-                  {q.options.filter(option => option.correct).map(option => option.text).join(", ")}
-                </span>
-              </p>
+              <div className="results-correct-answer">
+                <strong>Correct answer(s):</strong>
+                {q.options
+                  .filter(option => option.correct)
+                  .map(option => (
+                    <p key={option.id} className="correct-answer-text">{option.text}</p>
+                  ))}
+              </div>
             )}
           </div>
         );
       })}
+
       <button className="results-back" onClick={() => navigate("/")}>
         Back to Quiz
       </button>
