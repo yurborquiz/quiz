@@ -44,8 +44,8 @@ const ResultsPage: React.FC = () => {
     <div className="results-container">
       <h1 className="results-title">Quiz Results</h1>
       <p className="results-summary">
-        Correct: {correctAnswersCount} / {totalQuestions} ({correctPercentage}%) | 
-        Incorrect: {incorrectAnswersCount} / {totalQuestions} ({incorrectPercentage}%)
+        <strong>Correct:</strong> {correctAnswersCount} / {totalQuestions} ({correctPercentage}%) <br></br> 
+        <strong>Incorrect:</strong> {incorrectAnswersCount} / {totalQuestions} ({incorrectPercentage}%)
       </p>
 
       {questions.map(q => {
