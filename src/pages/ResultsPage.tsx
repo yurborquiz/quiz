@@ -48,13 +48,13 @@ const ResultsPage: React.FC = () => {
         <strong>Incorrect:</strong> {incorrectAnswersCount} / {totalQuestions} ({incorrectPercentage}%)
       </p>
 
-      {questions.map(q => {
+      {questions.map((q, index) => {
         const userAnswer = answers[q.id] || "";
         const correct = isCorrect(q, userAnswer);
 
         return (
           <div key={q.id} className={`results-question ${correct ? "correct" : "incorrect"}`}>
-            <p className="results-question-text">{q.question}</p>
+            <p className="results-question-text">{(index + 1) + ". " + q.question}</p>
 
             <p className={`results-answer ${correct ? "correct-answer" : "incorrect-answer"}`}>
               <strong>Your answer:</strong>

@@ -42,9 +42,9 @@ const QuizPage: React.FC = () => {
   return (
     <div className="quiz-container">
       <h1 className="quiz-title">Quiz</h1>
-      {selectedQuestions.map((q) => (
+      {selectedQuestions.map((q, index) => (
         <div key={q.id} className="quiz-question">
-          <p className="quiz-question-text">{q.question}</p>
+          <p className="quiz-question-text">{(index + 1) + ". " + q.question}</p>
           {q.type === "RADIO" && q.options && (
             <fieldset className="quiz-fieldset">
               <legend className="quiz-legend">Choose one answer:</legend>
