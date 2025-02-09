@@ -10,7 +10,7 @@ const LoginPage: React.FC = () => {
   const { login } = useAuth();
 
   const handleLogin = (): void => {
-    if (username === "user" && password === "password123") {
+    if (username === import.meta.env.VITE_USER && password === import.meta.env.VITE_PASSWORD) {
       login();
       navigate("/quiz");
     } else {
