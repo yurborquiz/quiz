@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "../styles/LoginPage.css";
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = (): void => {
     if (username === "user" && password === "password123") {
+      login();
       navigate("/quiz");
     } else {
       alert("Invalid credentials");
