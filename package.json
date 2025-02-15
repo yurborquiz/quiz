@@ -13,6 +13,7 @@
     "axios": "^1.7.9",
     "body-parser": "^1.20.3",
     "express": "^4.21.2",
+    "firebase": "^11.3.1",
     "fs": "^0.0.1-security",
     "miragejs": "^0.1.48",
     "react": "^18.3.1",

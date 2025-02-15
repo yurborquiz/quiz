@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import questions from "../data/questions.json";
+import { getDatabase, ref, get } from "firebase/database";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../firebaseConfig";
 import "../styles/QuizPage.css";
 
 interface Option {
@@ -17,19 +19,41 @@ interface Question {
   isRequired: boolean;
 }
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
 const QuizPage: React.FC = () => {
   const [selectedQuestions, setSelectedQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<{ [key: number]: string | string[] }>({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    const shuffledQuestions = (questions as Question[]).sort(() => 0.5 - Math.random());
-    const uniqueQuestions = new Set<Question>();
-    shuffledQuestions.forEach(q => uniqueQuestions.add(q));
-    setSelectedQuestions(Array.from(uniqueQuestions).slice(0, 80));
+    // Fetch questions from Firebase
+    const fetchQuestions = async () => {
+      try {
+        const questionsRef = ref(db, "Questions"); // Assuming "Questions" is your data node in Firebase
+        const snapshot = await get(questionsRef);
+        if (snapshot.exists()) {
+          const questionsData = snapshot.val();
+          const questionsList = Object.keys(questionsData).map((key) => ({
+            ...questionsData[key],
+            id: Number(key),
+          }));
+          const shuffledQuestions = questionsList.sort(() => 0.5 - Math.random());
+          const uniqueQuestions = new Set<Question>();
+          shuffledQuestions.forEach(q => uniqueQuestions.add(q));
+          setSelectedQuestions(Array.from(uniqueQuestions).slice(0, 80)); // Get up to 80 unique questions
+        } else {
+          console.log("No questions found in database.");
+        }
+      } catch (error) {
+        console.error("Error fetching questions:", error);
+      }
+    };
+
+    fetchQuestions();
   }, []);
-  
-  
 
   const handleAnswerChange = (id: number, value: string | string[]): void => {
     setAnswers({ ...answers, [id]: value });
