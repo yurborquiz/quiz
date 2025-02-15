@@ -1,7 +1,7 @@
 import React from "react";
 import { getDatabase, ref, set } from "firebase/database";
 import { app } from "../firebaseConfig";
-import questionsData from "../data/questions_copy.json"; 
+import questionsData from "../data/questions.json"; 
 
 const ExportQuestions: React.FC = () => {
   const uploadQuestionsToFirebase = async () => {
