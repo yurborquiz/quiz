@@ -5,6 +5,7 @@ import { firebaseConfig } from "../firebaseConfig";
 import "../styles/ManageQuestions.css";
 import { Question } from "../interfaces/IQestion";
 import { Option } from "../interfaces/IOption";
+import { useNavigate } from "react-router-dom";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
@@ -14,6 +15,7 @@ const ManageQuestions: React.FC = () => {
   const [editingQuestionId, setEditingQuestionId] = useState<number | null>(null);
   const [editingQuestionData, setEditingQuestionData] = useState<Question | null>(null);
   const [editingOption, setEditingOption] = useState<Option | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchQuestions();
@@ -115,6 +117,13 @@ const ManageQuestions: React.FC = () => {
 
   return (
     <div className="manage-container">
+      <div className="button-container">
+        <button 
+          className="google-style-button" 
+          onClick={() => navigate("/quiz")}>
+          Back to quiz
+        </button>
+      </div>
       <h1 className="manage-title">Manage Questions</h1>
       <ol className="manage-list">
         {questions.map((q) => (

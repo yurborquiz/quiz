@@ -81,6 +81,13 @@ const AddQuestion: React.FC = () => {
 
   return (
     <div className="add-question-container">
+      <div className="button-container">
+        <button 
+          className="google-style-button" 
+          onClick={() => navigate("/quiz")}>
+          Back to quiz
+        </button>
+      </div>
       <h1 className="add-question-title">Add New Question</h1>
 
       <div className="form-group">

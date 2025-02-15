@@ -7,8 +7,6 @@ import "../styles/QuizPage.css";
 import { Question } from "../interfaces/IQestion";
 import { Option } from "../interfaces/IOption";
 
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
@@ -18,10 +16,9 @@ const QuizPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch questions from Firebase
     const fetchQuestions = async () => {
       try {
-        const questionsRef = ref(db, "Questions"); // Assuming "Questions" is your data node in Firebase
+        const questionsRef = ref(db, "Questions");
         const snapshot = await get(questionsRef);
         if (snapshot.exists()) {
           const questionsData = snapshot.val();
@@ -54,6 +51,18 @@ const QuizPage: React.FC = () => {
 
   return (
     <div className="quiz-container">
+      <div className="button-container">
+        <button 
+          className="google-style-button" 
+          onClick={() => navigate("/add")}>
+          Add Question
+        </button>
+        <button 
+          className="google-style-button" 
+          onClick={() => navigate("/manage")}>
+          Manage Questions
+        </button>
+      </div>
       <h1 className="quiz-title">Quiz</h1>
       {selectedQuestions.map((q, index) => (
         <div key={q.id} className="quiz-question">
