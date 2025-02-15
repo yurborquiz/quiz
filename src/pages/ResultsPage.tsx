@@ -1,19 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/ResultsPage.css";
-
-interface Option {
-  id: number;
-  text: string;
-  correct: boolean;
-}
-
-interface Question {
-  id: number;
-  type: "RADIO" | "CHECKBOX";
-  question: string;
-  options: Option[];
-}
+import { Question } from "../interfaces/IQestion";
 
 const ResultsPage: React.FC = () => {
   const location = useLocation();

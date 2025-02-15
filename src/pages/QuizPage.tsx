@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import questions from "../data/questions.json";
+import { getDatabase, ref, get } from "firebase/database";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../firebaseConfig";
 import "../styles/QuizPage.css";
+import { Question } from "../interfaces/IQestion";
+import { Option } from "../interfaces/IOption";
 
-interface Option {
-  id: number;
-  text: string;
-  correct: boolean;
-}
-
-interface Question {
-  id: number;
-  type: "RADIO" | "CHECKBOX";
-  question: string;
-  options: Option[];
-  isRequired: boolean;
-}
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 const QuizPage: React.FC = () => {
   const [selectedQuestions, setSelectedQuestions] = useState<Question[]>([]);
@@ -23,13 +16,30 @@ const QuizPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const shuffledQuestions = (questions as Question[]).sort(() => 0.5 - Math.random());
-    const uniqueQuestions = new Set<Question>();
-    shuffledQuestions.forEach(q => uniqueQuestions.add(q));
-    setSelectedQuestions(Array.from(uniqueQuestions).slice(0, 80));
+    const fetchQuestions = async () => {
+      try {
+        const questionsRef = ref(db, "Questions");
+        const snapshot = await get(questionsRef);
+        if (snapshot.exists()) {
+          const questionsData = snapshot.val();
+          const questionsList = Object.keys(questionsData).map((key) => ({
+            ...questionsData[key],
+            id: Number(key),
+          }));
+          const shuffledQuestions = questionsList.sort(() => 0.5 - Math.random());
+          const uniqueQuestions = new Set<Question>();
+          shuffledQuestions.forEach(q => uniqueQuestions.add(q));
+          setSelectedQuestions(Array.from(uniqueQuestions).slice(0, 80)); // Get up to 80 unique questions
+        } else {
+          console.log("No questions found in database.");
+        }
+      } catch (error) {
+        console.error("Error fetching questions:", error);
+      }
+    };
+
+    fetchQuestions();
   }, []);
-  
-  
 
   const handleAnswerChange = (id: number, value: string | string[]): void => {
     setAnswers({ ...answers, [id]: value });
@@ -41,6 +51,18 @@ const QuizPage: React.FC = () => {
 
   return (
     <div className="quiz-container">
+      <div className="button-container">
+        <button 
+          className="google-style-button" 
+          onClick={() => navigate("/add")}>
+          Add Question
+        </button>
+        <button 
+          className="google-style-button" 
+          onClick={() => navigate("/manage")}>
+          Manage Questions
+        </button>
+      </div>
       <h1 className="quiz-title">Quiz</h1>
       {selectedQuestions.map((q, index) => (
         <div key={q.id} className="quiz-question">

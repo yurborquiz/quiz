@@ -5,6 +5,9 @@ import ProtectedRoute from "./components/ProtectedRoutes";
 import LoginPage from "./pages/LoginPage";
 import QuizPage from "./pages/QuizPage";
 import ResultsPage from "./pages/ResultsPage";
+import AddQuestion from "./pages/AddQuestion";
+import ExportQuestions from "./pages/ExportQuestions";
+import ManageQuestions from "./pages/ManageQuestions";
 
 const App: React.FC = () => {
   return (
@@ -16,7 +19,11 @@ const App: React.FC = () => {
           <Route element={<ProtectedRoute />}>
             <Route path="/quiz" element={<QuizPage />} />
             <Route path="/results" element={<ResultsPage />} />
+            <Route path="/add" element={<AddQuestion />} />
+            <Route path="/export" element={<ExportQuestions />} />
+            <Route path="/manage" element={<ManageQuestions />} />
           </Route>
+          
         </Routes>
       </Router>
     </AuthProvider>

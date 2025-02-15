@@ -1,0 +1,153 @@
+/* Manage Questions Container */
+.manage-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Question List */
+.manage-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.manage-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: #fafafa;
+  transition: background-color 0.3s ease;
+}
+
+.manage-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Form Styles */
+.manage-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Textarea */
+textarea {
+  resize: vertical;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 120px;
+  min-width: 400px;
+  transition: border 0.3s ease;
+}
+
+textarea:focus {
+  border-color: #4285f4;
+  outline: none;
+}
+
+/* Select */
+select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: border 0.3s ease;
+}
+
+select:focus {
+  border-color: #4285f4;
+  outline: none;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Option List */
+.manage-options-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.manage-option-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #fafafa;
+}
+
+.manage-option-item p {
+  margin: 0;
+}
+
+button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #4285f4;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #357ae8;
+}
+
+/* Save Button */
+button[type="button"] {
+  background-color: #34a853;
+  max-width: 25%;
+}
+
+button[type="button"]:hover {
+  background-color: #2c8f4b;
+}
+
+/* Save Question Button */
+button[type="submit"] {
+  background-color: #4285f4;
+}
+
+button[type="submit"]:hover {
+  background-color: #357ae8;
+}
+
+.google-style-button {
+  background-color: #4285F4; /* Google Blue */
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.google-style-button:hover {
+  background-color: #357ae8; /* Darker blue on hover */
+}
+
+.google-style-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.5);
+}

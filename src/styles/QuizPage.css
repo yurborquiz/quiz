@@ -100,6 +100,32 @@
   .quiz-submit:focus {
     outline: 3px solid rgba(26, 115, 232, 0.5);
   }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .google-style-button {
+    background-color: #4285F4; /* Google Blue */
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .google-style-button:hover {
+    background-color: #357ae8; /* Darker blue on hover */
+  }
+  
+  .google-style-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.5);
+  }
   
   /* Responsive design */
   @media (max-width: 600px) {
