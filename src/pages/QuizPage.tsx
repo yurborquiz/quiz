@@ -4,20 +4,9 @@ import { getDatabase, ref, get } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebaseConfig";
 import "../styles/QuizPage.css";
+import { Question } from "../interfaces/IQestion";
+import { Option } from "../interfaces/IOption";
 
-interface Option {
-  id: number;
-  text: string;
-  correct: boolean;
-}
-
-interface Question {
-  id: number;
-  type: "RADIO" | "CHECKBOX";
-  question: string;
-  options: Option[];
-  isRequired: boolean;
-}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

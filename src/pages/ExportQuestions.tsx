@@ -1,12 +1,12 @@
 import React from "react";
 import { getDatabase, ref, set } from "firebase/database";
-import { app } from "../firebaseConfig"; // Ensure you initialized Firebase here
-import questionsData from "../data/questions_copy.json"; // Import JSON
+import { app } from "../firebaseConfig";
+import questionsData from "../data/questions_copy.json"; 
 
 const ExportQuestions: React.FC = () => {
   const uploadQuestionsToFirebase = async () => {
     const db = getDatabase(app);
-    const questionsRef = ref(db, "Questions"); // "Questions" is the folder name
+    const questionsRef = ref(db, "Questions"); 
 
     try {
       await set(questionsRef, questionsData);

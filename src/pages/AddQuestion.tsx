@@ -4,23 +4,11 @@ import "../styles/AddQuestion.css";
 import { get, getDatabase, ref, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebaseConfig"; 
+import { Question } from "../interfaces/IQestion";
+import { Option } from "../interfaces/IOption";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-
-export interface Option {
-  id: number;
-  text: string;
-  correct: boolean;
-}
-
-export interface Question {
-  id: number;
-  type: "RADIO" | "CHECKBOX";
-  question: string;
-  options: Option[];
-  isRequired: boolean;
-}
 
 const AddQuestion: React.FC = () => {
   const [type, setType] = useState<"RADIO" | "CHECKBOX">("RADIO");

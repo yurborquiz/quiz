@@ -3,23 +3,11 @@ import { getDatabase, ref, get, set, remove } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../firebaseConfig";
 import "../styles/ManageQuestions.css";
+import { Question } from "../interfaces/IQestion";
+import { Option } from "../interfaces/IOption";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-
-interface Option {
-  id: number;
-  text: string;
-  correct: boolean;
-}
-
-interface Question {
-  id: number;
-  type: "RADIO" | "CHECKBOX";
-  question: string;
-  options: Option[];
-  isRequired: boolean;
-}
 
 const ManageQuestions: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
