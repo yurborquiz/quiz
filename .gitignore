@@ -25,3 +25,6 @@ dist-ssr
 
 # Dependency directories and files
 package-lock.json
+
+src/pages/ExportQuestions.tsx
+
