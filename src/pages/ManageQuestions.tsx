@@ -176,14 +176,17 @@ const ManageQuestions: React.FC = () => {
                             value={editingOption.text}
                             onChange={handleOptionChange}
                           />
-                          <input
-                            type="checkbox"
-                            name="correct"
-                            checked={editingOption.correct}
-                            onChange={(e) =>
-                              setEditingOption({ ...editingOption, correct: e.target.checked })
-                            }
-                          />
+                          <label>
+                            Correct:
+                            <input
+                              type="checkbox"
+                              name="correct"
+                              checked={editingOption.correct}
+                              onChange={(e) =>
+                                setEditingOption({ ...editingOption, correct: e.target.checked })
+                              }
+                            />
+                          </label>
                           <button type="button" onClick={() => handleOptionSave(option.id)}>Save</button>
                         </>
                       ) : (
