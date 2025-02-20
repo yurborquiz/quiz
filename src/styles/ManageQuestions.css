@@ -60,7 +60,6 @@ select {
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #fff;
   transition: border 0.3s ease;
 }
 
@@ -89,7 +88,6 @@ input[type="checkbox"] {
   border: 1px solid #ddd;
   margin-bottom: 10px;
   border-radius: 5px;
-  background-color: #fafafa;
 }
 
 .manage-option-item p {

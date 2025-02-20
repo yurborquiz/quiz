@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { getDatabase, ref, get, set, remove } from "firebase/database";
 import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "../firebaseConfig";
-import "../styles/ManageQuestions.css";
-import { Question } from "../interfaces/IQestion";
-import { Option } from "../interfaces/IOption";
+import { get, getDatabase, ref, remove, set } from "firebase/database";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { firebaseConfig } from "../firebaseConfig";
+import { Option } from "../interfaces/IOption";
+import { Question } from "../interfaces/IQestion";
+import "../styles/ManageQuestions.css";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);

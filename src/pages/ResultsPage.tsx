@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "../styles/ResultsPage.css";
 import { Question } from "../interfaces/IQestion";
+import "../styles/ResultsPage.css";
 
 const ResultsPage: React.FC = () => {
   const location = useLocation();
