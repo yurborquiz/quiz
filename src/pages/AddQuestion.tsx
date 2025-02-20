@@ -1,11 +1,11 @@
+import { initializeApp } from "firebase/app";
+import { get, getDatabase, ref, set } from "firebase/database";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/AddQuestion.css";
-import { get, getDatabase, ref, set } from "firebase/database";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "../firebaseConfig"; 
-import { Question } from "../interfaces/IQestion";
+import { firebaseConfig } from "../firebaseConfig";
 import { Option } from "../interfaces/IOption";
+import { Question } from "../interfaces/IQestion";
+import "../styles/AddQuestion.css";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
@@ -46,33 +46,29 @@ const AddQuestion: React.FC = () => {
     }
 
     try {
-      // Fetch existing questions from Firebase
       const questionsRef = ref(db, "Questions");
       const snapshot = await get(questionsRef);
       let lastQuestionId = 0;
 
-      // If there are existing questions, find the one with the highest id
       if (snapshot.exists()) {
         const questions = snapshot.val();
         lastQuestionId = Math.max(...Object.keys(questions).map(Number));
       }
 
-      // New question id will be lastQuestionId + 1
       const newQuestionId = lastQuestionId + 1;
 
       const newQuestion: Question = {
-        id: newQuestionId, // Use last question's id + 1
+        id: newQuestionId,
         type,
         question,
         options,
         isRequired,
       };
 
-      // Save new question to Firebase Realtime Database
       const questionRef = ref(db, `Questions/${newQuestionId}`);
       await set(questionRef, newQuestion);
       alert("Question added successfully!");
-      navigate("/"); // Redirect to the main page or wherever
+      navigate("/");
     } catch (error) {
       console.error("Error adding question:", error);
       alert("Failed to add the question. Please try again.");
